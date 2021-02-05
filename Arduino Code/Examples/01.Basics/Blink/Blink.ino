@@ -1,37 +1,25 @@
 /*
-  Blink
+  การกระพริบ
 
-  Turns an LED on for one second, then off for one second, repeatedly.
+  การเปิดหลอด LED ในช่วงเวลา 1 วินาทีหรือการปิดหลอด LED ในช่วงเวลา 1 วินาที
+  โดยบอร์ด Arduinos จะมี LED อยู่บนตัวอุปกรณ์ ซึ่งเราสามารถควบคุมการเปิดปิดหลอดได้โดยตรง โดยเรียกใช้จากตัวแปรที่มีชื่อว่า LED_BUILTIN
+  ถ้าอยากรู้ว่าแต่ละบอร์ดมีอุปกรณ์หรือคุณสมบัติต่าง ๆ สามารถเข้าไปดูรายละเอียดได้ที่ https://www.arduino.cc/en/Main/Products
 
-  Most Arduinos have an on-board LED you can control. On the UNO, MEGA and ZERO
-  it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN is set to
-  the correct LED pin independent of which board is used.
-  If you want to know what pin the on-board LED is connected to on your Arduino
-  model, check the Technical Specs of your board at:
-  https://www.arduino.cc/en/Main/Products
-
-  modified 8 May 2014
-  by Scott Fitzgerald
-  modified 2 Sep 2016
-  by Arturo Guadalupi
-  modified 8 Sep 2016
-  by Colby Newman
-
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/Blink
 */
 
-// the setup function runs once when you press reset or power the board
+// ส่วนของการตั้งค่าจะตั้งค่าใหม่ทุกครั้งเมื่อมีการรีเซ็ต
 void setup() {
-  // initialize digital pin LED_BUILTIN as an output.
+  /*คำสั่งการกำหนดชนิดของขาอุปกรณ์ 
+  โดยใช้คำสั่ง pinMode และจะตามด้วยตัวแปรหรือตำแหน่งขา (LED_BUILTIN, 
+  และตามต่อด้วยสถานะ OUTPUT)และปิดท้ายตด้วยเซมิโคลอน ;
+  */
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
-// the loop function runs over and over again forever
+// ส่วนของการทำงานที่ละบรรทัดและจะทำงานวนลูปไปเรื่อย ๆ
 void loop() {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, HIGH);   // คำสั่งกำหนดให้ตัวแปรหรือตำแหน่งขามีสถานะเป็น HIGH 
+  delay(1000);                       // ฟังก์ชันการหน่วงเวลา
+  digitalWrite(LED_BUILTIN, LOW);    // คำสั่งกำหนดให้ตัวแปรหรือตำแหน่งขามีสถานะเป็น LOW 
+  delay(1000);                       // ฟังก์ชันการหน่วงเวลา
 }
