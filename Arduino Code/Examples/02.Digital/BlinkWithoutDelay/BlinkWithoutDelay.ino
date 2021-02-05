@@ -1,71 +1,53 @@
 /*
-  Blink without Delay
+  การกระพริบของหลอด LED โดยไม่ใช่ฟังก์ชัน Delay
 
-  Turns on and off a light emitting diode (LED) connected to a digital pin,
-  without using the delay() function. This means that other code can run at the
-  same time without being interrupted by the LED code.
+  การเปิดหลอด LED หรือการปิดหลอด LED โดยไม่ใช่ฟังก์ชัน Delay
+  โดยบอร์ด Arduinos จะมี LED อยู่บนตัวอุปกรณ์ ซึ่งเราสามารถควบคุมการเปิดปิดหลอดได้โดยตรง โดยเรียกใช้จากตัวแปรที่มีชื่อว่า LED_BUILTIN
+  ถ้าอยากรู้ว่าแต่ละบอร์ดมีอุปกรณ์หรือคุณสมบัติต่าง ๆ สามารถเข้าไปดูรายละเอียดได้ที่ https://www.arduino.cc/en/Main/Products
 
-  The circuit:
-  - Use the onboard LED.
-  - Note: Most Arduinos have an on-board LED you can control. On the UNO, MEGA
-    and ZERO it is attached to digital pin 13, on MKR1000 on pin 6. LED_BUILTIN
-    is set to the correct LED pin independent of which board is used.
-    If you want to know what pin the on-board LED is connected to on your
-    Arduino model, check the Technical Specs of your board at:
-    https://www.arduino.cc/en/Main/Products
-
-  created 2005
-  by David A. Mellis
-  modified 8 Feb 2010
-  by Paul Stoffregen
-  modified 11 Nov 2013
-  by Scott Fitzgerald
-  modified 9 Jan 2017
-  by Arturo Guadalupi
-
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/BlinkWithoutDelay
 */
 
-// constants won't change. Used here to set a pin number:
-const int ledPin =  LED_BUILTIN;// the number of the LED pin
+// การสร้างตัวแปรเก็บค่าแบบ const int คือค่าจำนวนเต็มแบบคงที่ ที่มีชื่อว่า ledPin ที่มีการเก็บ LED_BUILTIN และปิดท้ายตด้วยเซมิโคลอน ;
+const int ledPin =  LED_BUILTIN;
 
-// Variables will change:
-int ledState = LOW;             // ledState used to set the LED
+// การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า ledPin ที่มีการเก็บ LED_BUILTIN และปิดท้ายตด้วยเซมิโคลอน ;
+int ledState = LOW;
 
-// Generally, you should use "unsigned long" for variables that hold time
-// The value will quickly become too large for an int to store
-unsigned long previousMillis = 0;        // will store last time LED was updated
+// การสร้างตัวแปรเก็บค่าแบบ unsigned long คือค่าจํานวนเต็มแบบไม่คิดเครื่องหมาย ที่มีชื่อว่า previousMillis ที่มีการเก็บค่าตัวเลข 0 และปิดท้ายตด้วยเซมิโคลอน ;
+unsigned long previousMillis = 0;
 
-// constants won't change:
-const long interval = 1000;           // interval at which to blink (milliseconds)
+// การสร้างตัวแปรเก็บค่าแบบ const long คือค่าจำนวนเต็มแบบคงที่ ที่มีชื่อว่า interval ที่มีการเก็บตัวเลขจำนวน 1000 และปิดท้ายตด้วยเซมิโคลอน ;
+const long interval = 1000;
 
+// ส่วนของการตั้งค่าจะตั้งค่าใหม่ทุกครั้งเมื่อมีการรีเซ็ต
 void setup() {
-  // set the digital pin as output:
+  /*คำสั่งการกำหนดชนิดของขาอุปกรณ์
+    โดยใช้คำสั่ง pinMode และจะตามด้วยตัวแปรหรือตำแหน่งขา (ledPin,
+    และตามต่อด้วยสถานะ OUTPUT)และปิดท้ายด้วยเซมิโคลอน ;
+  */
   pinMode(ledPin, OUTPUT);
 }
 
+// ส่วนของการทำงานที่ละบรรทัดและจะทำงานวนลูปไปเรื่อย ๆ
 void loop() {
-  // here is where you'd put code that needs to be running all the time.
-
-  // check to see if it's time to blink the LED; that is, if the difference
-  // between the current time and last time you blinked the LED is bigger than
-  // the interval at which you want to blink the LED.
+  // การสร้างตัวแปรเก็บค่าแบบ unsigned long คือค่าจํานวนเต็มแบบไม่คิดเครื่องหมาย ที่มีชื่อว่า currentMillis ที่มีการเก็บค่าฟังก์ชัน millis() และปิดท้ายตด้วยเซมิโคลอน ;
   unsigned long currentMillis = millis();
 
+  // คำสั่งเงื่อนไข โดยกำหนดให้ ถ้าตัวแปรการคำนวน currentMillis - previousMillis มีค่ามากกว่าหรือเท่ากับตัวแปร interval จึงจะสามารถเข้าไปทำงานในเงื่อนไข
   if (currentMillis - previousMillis >= interval) {
-    // save the last time you blinked the LED
+    //ค่าตัวแปร previousMillis จะมีค่าเท่ากับค่าตัวแปร currentMillis
     previousMillis = currentMillis;
 
-    // if the LED is off turn it on and vice-versa:
+    // คำสั่งเงื่อนไข โดยกำหนดให้ ถ้าตัวแปร ledState มีค่าเท่ากับเท่ากับค่าสถานะ LOW จึงจะสามารถเข้าไปทำงานในเงื่อนไข แต่ถ้าไม่ใช้จะข้ามไปเงื่อนไข else
     if (ledState == LOW) {
+      //ค่าตัวแปร ledState จะมีค่าเท่ากับค่าสถานะ HIGH
       ledState = HIGH;
     } else {
+      //ค่าตัวแปร ledState จะมีค่าเท่ากับค่าสถานะ LOW
       ledState = LOW;
     }
 
-    // set the LED with the ledState of the variable:
+    // คำสั่ง digitalWrite กำหนดให้ตัวแปรหรือตำแหน่งขา (ledPin, มีสถานะหรือมีค่าเท่ากับตัวแปร ledState และปิดท้ายตด้วยเซมิโคลอน ;
     digitalWrite(ledPin, ledState);
   }
 }
