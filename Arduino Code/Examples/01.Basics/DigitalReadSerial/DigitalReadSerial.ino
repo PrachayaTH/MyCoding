@@ -1,29 +1,30 @@
 /*
-  DigitalReadSerial
+  การอ่านค่าดิจิตอลผ่านทาง Serial Monitor
 
-  Reads a digital input on pin 2, prints the result to the Serial Monitor
+  การอ่านค่าแบบอนาล็อคจะต่อผ่านขา 2 และสามารถแสดงค่าที่อ่านได้ออกจากจอภาพ (Serial Monitor)
 
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/DigitalReadSerial
 */
 
-// digital pin 2 has a pushbutton attached to it. Give it a name:
+// การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า pushButton ที่มีการเก็บค่าตัวเลข 2;
 int pushButton = 2;
 
-// the setup routine runs once when you press reset:
+// ส่วนของการตั้งค่าจะตั้งค่าใหม่ทุกครั้งเมื่อมีการรีเซ็ต
 void setup() {
-  // initialize serial communication at 9600 bits per second:
+  // คำสั่งเปิดพอร์ตอ่านข้อมูลผ่านทางจอภาพที่พอร์ต 9600
   Serial.begin(9600);
-  // make the pushbutton's pin an input:
+  /*คำสั่งการกำหนดชนิดของขาอุปกรณ์ 
+  โดยใช้คำสั่ง pinMode และจะตามด้วยตัวแปรหรือตำแหน่งขา (pushButton, 
+  และตามต่อด้วยสถานะ INPUT)และปิดท้ายด้วยเซมิโคลอน ;
+  */
   pinMode(pushButton, INPUT);
 }
 
-// the loop routine runs over and over again forever:
+// ส่วนของการทำงานที่ละบรรทัดและจะทำงานวนลูปไปเรื่อย ๆ
 void loop() {
-  // read the input pin:
+  // การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า buttonState ที่มีการเก็บค่าการอ่านแบบอนาล็อคโดยใช้คำสั่ง digitalRead และตามด้วยตำแหน่งขาหรือตัวแปรที่จะอ่านข้อมูลคือ (pushButton) และปิดท้ายตด้วยเซมิโคลอน ;
   int buttonState = digitalRead(pushButton);
-  // print out the state of the button:
+  // การแสดงค่าข้อมูลแบบขึ้นบรรทัดใหม่ โดยใช้คำสั่ง Serial.println และตามด้วยตำแหน่งหรือตัวแปรที่เก็บค่านั้นไว้ (buttonState) และปิดท้ายตด้วยเซมิโคลอน ;
   Serial.println(buttonState);
-  delay(1);        // delay in between reads for stability
+  // ฟังก์ชันการหน่วงเวลา
+  delay(1);        
 }

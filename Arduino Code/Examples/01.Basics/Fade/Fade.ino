@@ -1,40 +1,39 @@
 /*
-  Fade
+  การกำหนดความสว่าง
 
-  This example shows how to fade an LED on pin 9 using the analogWrite()
-  function.
+  ตัวอย่างการกำหนดความสว่างของหลอด LED ที่ต่อใช้งานที่ตำแหน่งขาที่ 9 โดยใช้คำสั่ง analogWrite();
 
-  The analogWrite() function uses PWM, so if you want to change the pin you're
-  using, be sure to use another PWM capable pin. On most Arduino, the PWM pins
-  are identified with a "~" sign, like ~3, ~5, ~6, ~9, ~10 and ~11.
+  คำสั่ง analogWrite() จะเป็นการใช้งานแบบ PWM ดังนั้นถ้าเราต้องการที่จะเปลี่ยนตำแหน่งขาใช้งานให้สังเกตสัญลักษณ์"~" 
+  ที่มีบนตำแหน่งขาที่แสดงบนอุปกรณ์อย่างเช่น ~3, ~5, ~6, ~9, ~10 และ ~11.
 
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/Fade
 */
 
-int led = 9;           // the PWM pin the LED is attached to
-int brightness = 0;    // how bright the LED is
-int fadeAmount = 5;    // how many points to fade the LED by
+int led = 9;           // การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า led ที่มีการเก็บค่าตัวเลข 9 และปิดท้ายตด้วยเซมิโคลอน ; ซึ่งขาตำแหน่งที่ 9 จะเป็นตำแหน่ง PWM
+int brightness = 0;    // การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า ledbrightness ที่มีการเก็บค่าตัวเลข 0 และปิดท้ายตด้วยเซมิโคลอน ; 
+int fadeAmount = 5;    // การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า fadeAmount ที่มีการเก็บค่าตัวเลข 5 และปิดท้ายตด้วยเซมิโคลอน ; 
 
-// the setup routine runs once when you press reset:
+// ส่วนของการตั้งค่าจะตั้งค่าใหม่ทุกครั้งเมื่อมีการรีเซ็ต
 void setup() {
-  // declare pin 9 to be an output:
+  /*คำสั่งการกำหนดชนิดของขาอุปกรณ์
+    โดยใช้คำสั่ง pinMode และจะตามด้วยตัวแปรหรือตำแหน่งขา (led,
+    และตามต่อด้วยสถานะ OUTPUT)และปิดท้ายด้วยเซมิโคลอน ;
+  */
   pinMode(led, OUTPUT);
 }
 
-// the loop routine runs over and over again forever:
+// ส่วนของการทำงานที่ละบรรทัดและจะทำงานวนลูปไปเรื่อย ๆ
 void loop() {
-  // set the brightness of pin 9:
+  //คำสั่ง analogWrite จะกำหนดให้ตัวแปรหรือตำแหน่งขา (led, มีค่าเท่ากับ brightness) และปิดท้ายตด้วยเซมิโคลอน ; 
   analogWrite(led, brightness);
 
-  // change the brightness for next time through the loop:
+  //ค่าตัวแปร brightness จะมีค่าเท่ากับค่าตัวแปร brightness บวกกับค่าตัวแปร fadeAmount และปิดท้ายตด้วยเซมิโคลอน ; 
   brightness = brightness + fadeAmount;
 
-  // reverse the direction of the fading at the ends of the fade:
+  // คำสั่งเงื่อนไข โดยกำหนดให้ ถ้าตัวแปร brightness มีค่าน้อยกว่าหรือเท่ากับ 0 หรือ brightness มีค่ามากกว่าหรือเท่ากับ 255 จึงจะสามารถเข้าไปทำงานในเงื่อนไข
   if (brightness <= 0 || brightness >= 255) {
+    //ค่าตัวแปร fadeAmount จะมีค่าเท่ากับค่าตัวแปร -fadeAmount 
     fadeAmount = -fadeAmount;
   }
-  // wait for 30 milliseconds to see the dimming effect
+  // ฟังก์ชันการหน่วงเวลา
   delay(30);
 }
