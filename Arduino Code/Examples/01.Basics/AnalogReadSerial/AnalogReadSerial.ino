@@ -1,26 +1,24 @@
 /*
-  AnalogReadSerial
-
-  Reads an analog input on pin 0, prints the result to the Serial Monitor.
-  Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).
+  การอ่านค่าตัวต้านทานปรับค่าได้ผ่านทางจอภาพ (Serial Monitor)
+  
+  การอ่านค่าแบบอนาล็อคจะต่อผ่านขา A0 - A5 และสามารถแสดงค่าที่อ่านได้ออกจากจอภาพ (Serial Monitor)
+  และสามารถอ่านค่าแบบกราฟ (Serial Plotter) ได้โดยกดไปที่ Tools > Serial Plotter menu
   Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
 
-  This example code is in the public domain.
-
-  http://www.arduino.cc/en/Tutorial/AnalogReadSerial
 */
 
-// the setup routine runs once when you press reset:
-void setup() {
-  // initialize serial communication at 9600 bits per second:
+// ส่วนของการตั้งค่าจะตั้งค่าใหม่ทุกครั้งเมื่อมีการรีเซ็ต
+void setup() { 
+  // คำสั่งเปิดพอร์ตอ่านข้อมูลผ่านทางจอภาพที่พอร์ต 9600
   Serial.begin(9600);
 }
 
-// the loop routine runs over and over again forever:
+// ส่วนของการทำงานที่ละบรรทัดและจะทำงานวนลูปไปเรื่อย ๆ
 void loop() {
-  // read the input on analog pin 0:
+  // การสร้างตัวแปรเก็บค่าแบบ int ที่มีชื่อว่า sensorValue ที่มีการเก็บค่าการอ่านแบบอนาล็อคโดยใช้คำสั่ง analogRead และตามด้วยตำแหน่งขาที่จะอ่านข้อมูลคือ (A0) และปิดท้ายตด้วยเซมิโคลอน ;
   int sensorValue = analogRead(A0);
-  // print out the value you read:
+  // การแสดงค่าข้อมูลแบบขึ้นบรรทัดใหม่ โดยใช้คำสั่ง Serial.println และตามด้วยตำแหน่งหรือตัวแปรที่เก็บค่านั้นไว้ (sensorValue) และปิดท้ายตด้วยเซมิโคลอน ;
   Serial.println(sensorValue);
-  delay(1);        // delay in between reads for stability
+  // ฟังก์ชันการหน่วงเวลา
+  delay(1);        
 }
