@@ -3,6 +3,7 @@
   
   การอ่านค่าแบบอนาล็อคจะต่อผ่านขา A0 - A5 และสามารถแสดงค่าที่อ่านได้ออกจากจอภาพ (Serial Monitor)
   และสามารถอ่านค่าแบบกราฟ (Serial Plotter) ได้โดยกดไปที่ Tools > Serial Plotter menu
+  
   Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.
 
 */
